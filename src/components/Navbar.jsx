@@ -11,7 +11,7 @@ export default function Navbar(){
                 </NavLink>
             
                 <div className="navbar-links">
-                    <NavLink to="/" className={`navbar-link ${({ isActive }) => isActive ? "active" : ""}`}>
+                    <NavLink to="/" className={({ isActive }) => `navbar-link ${isActive ? "active" : ""}`}>
                         Home
                     </NavLink>
                     <Link to="/checkout" className="navbar-link">
