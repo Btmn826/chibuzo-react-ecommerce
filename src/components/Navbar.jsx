@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 
 export default function Navbar(){
@@ -9,23 +9,24 @@ export default function Navbar(){
                 <NavLink to="/" className="navbar-brand">
                     CPG-Shop
                 </NavLink>
-            </div>
-            <div className="navbar-links">
-                <NavLink to="/" className="navbar-link">
-                    Home
-                </NavLink>
-                <NavLink to="/checkout" className="navbar-link">
-                    Cart
-                </NavLink>
-            </div>
-            <div className="navbar-auth">
-                <div className="navbar-auth-links">
-                    <NavLink to="/auth" className="btn btn-secondary">
-                        Login
+            
+                <div className="navbar-links">
+                    <NavLink to="/" className={`navbar-link ${({ isActive }) => isActive ? "active" : ""}`}>
+                        Home
                     </NavLink>
-                    <NavLink to="/auth" className="btn btn-primary">
-                        Signup
-                    </NavLink>
+                    <Link to="/checkout" className="navbar-link">
+                        Cart
+                    </Link>
+                </div>
+                <div className="navbar-auth">
+                    <div className="navbar-auth-links">
+                        <Link to="/auth" className="btn btn-secondary">
+                            Login
+                        </Link>
+                        <Link to="/auth" className="btn btn-primary">
+                            Signup
+                        </Link>
+                    </div>
                 </div>
             </div>
         </nav>

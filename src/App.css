@@ -526,3 +526,11 @@ body {
     align-items: flex-start;
   }
 }
+
+
+/* My styles  */
+.navbar-link.active{
+  border: 2px solid #721c24;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
