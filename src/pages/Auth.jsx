@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Auth(){
 
-    const [mode, setMode] = useState("login");
+    const [mode, setMode] = useState("signup");
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm();
     const [error, setError] = useState(null);
@@ -38,7 +38,7 @@ export default function Auth(){
                     <h1 className="page-title">
                         {mode === "signup" ? "Sign up" : "Login"}
                     </h1>
-                    <form action="" className="auth-form" onSubmit={handleSubmit(onSubmit)}>
+                    <form autoComplete="yes" className="auth-form" onSubmit={handleSubmit(onSubmit)}>
                         {error && <div className="error-message">{error}</div>}
                         <div className="form-group">
                             <label className="form-label" htmlFor="email">Email</label>
