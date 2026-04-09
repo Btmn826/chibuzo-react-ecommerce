@@ -58,6 +58,16 @@ export default function CartProvider({ children }) {
     setCartItems([]);
   }
 
+  // cart persistence when not logged in
+  // useEffect(() => {
+  //   const storedCart = localStorage.getItem("cart")
+  //   if (storedCart) {
+  //     setCart(JSON.parse(storedCart))
+  //   }
+  // }, [])
+
+  const cart = cartItems
+
   return (
     <CartContext.Provider
       value={{
@@ -68,6 +78,7 @@ export default function CartProvider({ children }) {
         updateQuantity,
         getCartTotal,
         clearCart,
+        cart
       }}
     >
       {children}

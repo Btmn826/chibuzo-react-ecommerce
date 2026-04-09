@@ -1,9 +1,13 @@
 import { NavLink, Link } from "react-router-dom";
 import {useAuth} from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 
 
 export default function Navbar(){
     const { user, logout} = useAuth();
+    const {cart} = useCart();
+
+    const totalQuantity = cart?.reduce((total, item) => total + item.quantity, null);
 
     return (
         <nav className="navbar">
@@ -16,9 +20,15 @@ export default function Navbar(){
                     <NavLink to="/" className={({ isActive }) => `navbar-link ${isActive ? "active" : ""}`}>
                         Home
                     </NavLink>
-                    <Link to="/checkout" className="navbar-link">
-                        Cart
-                    </Link>
+                    <div className="cart-icon">
+                        <Link to="/checkout" className="navbar-link">
+                            Cart🛒
+                                {totalQuantity && <span className="cart-badge">
+                                {totalQuantity}
+                                </span>}
+                            
+                        </Link>
+                    </div>
                 </div>
                 <div className="navbar-auth">
                     {

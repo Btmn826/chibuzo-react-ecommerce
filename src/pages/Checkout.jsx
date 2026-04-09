@@ -1,4 +1,8 @@
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 export default function Checkout() {
   const {
@@ -7,18 +11,41 @@ export default function Checkout() {
     removeFromCart,
     getCartTotal,
     clearCart,
+    cart
   } = useCart();
+
   const cartItems = getCartItemsWithProducts();
 
   const total = getCartTotal();
 
+  const {user} = useAuth();
+  const navigate = useNavigate();
+
   function placeOrder() {
-    alert("Successful Order!");
+    // alert("Successful Order!");
+    // clearCart();
+
+    if(!user){
+      navigate("/auth");
+    }
+    if(cartItems.length === 0){
+      return (
+        <div>
+          <p>
+            Cart is empty, <Link to="/"> continue shopping</Link>
+          </p>
+        </div>
+      );
+    }
+
+    alert('Order placed successfully');
     clearCart();
+    navigate("/")
   }
+
   return (
     <div className="page">
-      <div className="container">
+      {cart.length !== 0 ? <div className="container">
         <h1 className="page-title">Checkout</h1>
         <div className="checkout-container">
           <div className="checkout-items">
@@ -33,7 +60,7 @@ export default function Checkout() {
                 <div className="checkout-item-details">
                   <h3 className="checkout-item-name">{item.product.name}</h3>
                   <p className="checkout-item-price">
-                    ${item.product.price} each
+                    &#8358;{item.product.price} each
                   </p>
                 </div>
                 <div className="checkout-item-controls">
@@ -87,7 +114,12 @@ export default function Checkout() {
             </button>
           </div>
         </div>
-      </div>
+      </div> : 
+      <div className="container">
+        <p className="cart-empty">
+          Cart is empty, <Link to="/"> continue shopping</Link>
+        </p>
+      </div>}
     </div>
   );
 }
